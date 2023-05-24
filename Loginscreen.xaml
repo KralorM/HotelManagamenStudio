@@ -1,0 +1,21 @@
+﻿<Window x:Class="HotelManagamenStudio.Loginscreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManagamenStudio"
+        mc:Ignorable="d"
+        Title="Loginscreen" Height="450" Width="310">
+    <Window.Resources>
+        <ImageBrush x:Key="hotel5image" ImageSource="C:\Users\gekon\Desktop\hotel5.jpg"/>
+    </Window.Resources>
+    <Grid Background="{StaticResource hotel5image}">
+        <Button x:Name="Submmit_bttn" Content="Submit" HorizontalAlignment="Left" Margin="106,389,0,0" VerticalAlignment="Top" Width="89" Click="Submmit_bttn_Click" FontFamily="Arial Black"/>
+        <TextBox x:Name="Username_txtbox" HorizontalAlignment="Left" Margin="90,317,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="passwordlabel" Content="Password" HorizontalAlignment="Left" Margin="12,344,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black"/>
+        <Label x:Name="usernamelabel" Content="Username" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black"/>
+        <PasswordBox x:Name="Passwordbox1" HorizontalAlignment="Left" Margin="90,348,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Hotel Managament Studio" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="20"/>
+        <Label Content="Log in:" HorizontalAlignment="Left" Margin="125,279,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black"/>
+    </Grid>
+</Window>
