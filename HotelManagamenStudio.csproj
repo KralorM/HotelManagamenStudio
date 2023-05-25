@@ -70,8 +70,14 @@
     <Compile Include="bookings.cs">
       <DependentUpon>Hotlemanagamentsystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Bookingswindow.xaml.cs">
+      <DependentUpon>Bookingswindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="employees.cs">
       <DependentUpon>Hotlemanagamentsystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employeewindow.xaml.cs">
+      <DependentUpon>Employeewindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="guests.cs">
       <DependentUpon>Hotlemanagamentsystem.tt</DependentUpon>
@@ -90,6 +96,17 @@
     <Compile Include="rooms.cs">
       <DependentUpon>Hotlemanagamentsystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rooms.xaml.cs">
+      <DependentUpon>Rooms.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Bookingswindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Employeewindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Loginscreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +133,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Rooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -143,7 +164,10 @@
       <DependentUpon>Hotlemanagamentsystem.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\bookings.datasource" />
+    <None Include="Properties\DataSources\employees.datasource" />
     <None Include="Properties\DataSources\guests.datasource" />
+    <None Include="Properties\DataSources\rooms.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

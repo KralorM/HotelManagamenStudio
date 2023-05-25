@@ -47,7 +47,10 @@
             <Button Content="Add" Width="84" Command="{StaticResource AddCommand}"/>
             <Button Content="Update" Width="86" Command="{StaticResource UpdateCommand}"/>
             <Button Content="Delete" Width="81" Command="{StaticResource DeleteCommand}" Click="Delete_Button_Click"/>
-            <Button Content="Cancel" Width="95" Command="{StaticResource CancelCommand}"/>
+            <Button Content="Rooms" Width="95" Click="Button_Click_rooms"/>
+            <Button Content="Employees" Width="95" Click="Button_Click_emp"/>
+            <Button Content="Bookings" Width="95" Click="Button_Click_bookings"/>
+            
 
         </StackPanel>
         <Grid x:Name="existingGuestGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="3,0,0,0" Visibility="Visible" VerticalAlignment="Top" Background="AntiqueWhite" DataContext="{StaticResource guestsViewSource}" Grid.RowSpan="2" Width="790" Height="207">

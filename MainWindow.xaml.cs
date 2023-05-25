@@ -172,5 +172,23 @@ namespace HotelManagamenStudio
             
             
         }
+
+        private void Button_Click_rooms(object sender, RoutedEventArgs e)
+        {
+            Rooms rooms = new Rooms();
+            rooms.Show();
+        }
+
+        private void Button_Click_emp(object sender, RoutedEventArgs e)
+        {
+            Employeewindow employeewindow = new Employeewindow();
+            employeewindow.Show();
+        }
+
+        private void Button_Click_bookings(object sender, RoutedEventArgs e)
+        {
+            Bookingswindow bookingswindow = new Bookingswindow();
+            bookingswindow.Show();
+        }
     }
 }
