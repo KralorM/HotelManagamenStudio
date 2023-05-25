@@ -33,12 +33,11 @@ namespace HotelManagamenStudio
             bookingsViewSource = ((CollectionViewSource)FindResource("guestsViewSource1"));
             DataContext = this;
 
-            var guest = from g in context.guests
-                        select g;
+            //var guest = from g in context.guests
+                        //select g;
 
-            
 
-            this.Resultguestgrid.ItemsSource = guest.ToList();
+            //this.Resultguestgrid.ItemsSource = guest.ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -53,12 +52,16 @@ namespace HotelManagamenStudio
 
             // After the data is loaded, call the DbSet<T>.Local property    
             // to use the DbSet<T> as a binding source.   
+            
             guestViewSource.Source = context.guests.Local;
-        }
-        //private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        //{
+            this.guestsDataGrid.ItemsSource = context.guests.Local;
+            // Load data by setting the CollectionViewSource.Source property:
 
-        //}
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
 
         private void CommandBinding_Executed_1(object sender, ExecutedRoutedEventArgs e)
         {
@@ -82,8 +85,29 @@ namespace HotelManagamenStudio
         }
 
         private void CommandBinding_Executed_2(object sender, ExecutedRoutedEventArgs e)
-        {
+        {   
+           hotel5Entities hotel5 = new hotel5Entities();
 
+            var r = from g in hotel5.guests
+                    where g.guest_id == this.guestid
+                    select g;
+
+
+            guests guests = r.FirstOrDefault();
+
+            if (guests != null)
+            {
+                guests.first_name = this.FirstNameTextBox.Text;
+                guests.last_name = this.LastNameTextBox.Text;
+                guests.phone = this.phoneTextBox.Text;
+                guests.adress = this.addressTextBox.Text;
+                guests.nationality = this.NationalityTextBox.Text;
+                hotel5.SaveChanges();
+
+            }
+
+            MessageBox.Show("Selected guest have been updated!");
+            
         }
 
         private void CommandBinding_Executed_3(object sender, ExecutedRoutedEventArgs e)
@@ -125,6 +149,28 @@ namespace HotelManagamenStudio
 
                 }
             }
+        }
+
+        private int guestid = 0; 
+        private void guestsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {   if(this.guestsDataGrid.SelectedIndex >= 0)
+            {
+                if (this.guestsDataGrid.SelectedItems.Count >= 0)
+                {
+                    if (this.guestsDataGrid.SelectedItems[0].GetType() == typeof(guests))
+                    {
+                        guests g = (guests)this.guestsDataGrid.SelectedItems[0];
+                        this.FirstNameTextBox.Text = g.first_name;
+                        this.LastNameTextBox.Text = g.last_name;
+                        this.phoneTextBox.Text = g.phone;
+                        this.addressTextBox.Text = g.adress;
+                        this.NationalityTextBox.Text = g.nationality;
+                        this.guestid = g.guest_id;
+                    }
+                }
+            }
+            
+            
         }
     }
 }

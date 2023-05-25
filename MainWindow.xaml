@@ -10,6 +10,7 @@
         <CollectionViewSource x:Key="guestsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:guests}}"/>
         <CollectionViewSource x:Key="guestsViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:guests}}"/>
         <CollectionViewSource x:Key="guestsbookingsViewSource" Source="{Binding bookings, Source={StaticResource guestsViewSource1}}"/>
+        
         <Style x:Key="Label" TargetType="{x:Type Label}" BasedOn="{x:Null}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -27,6 +28,7 @@
         <RoutedUICommand x:Key="UpdateCommand" Text="Update"/>
         <RoutedUICommand x:Key="DeleteCommand" Text="Delete"/>
         <RoutedUICommand x:Key="CancelCommand" Text="Cancel"/>
+        <CollectionViewSource x:Key="guestsViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:guests}}"/>
 
     </Window.Resources>
     <Window.CommandBindings>
@@ -35,7 +37,7 @@
         <CommandBinding Command="{StaticResource DeleteCommand}" Executed="CommandBinding_Executed_3"/>
         <CommandBinding Command="{StaticResource CancelCommand}" Executed="CommandBinding_Executed_4"/>
     </Window.CommandBindings>
-    <Grid>
+    <Grid DataContext="{StaticResource guestsViewSource2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -105,24 +107,17 @@
             </TextBox>
 
         </Grid>
-        <DataGrid x:Name="Resultguestgrid" Margin="2,212,10,10" Grid.Row="2">
+        <DataGrid x:Name="guestsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,212,10,10" Grid.Row="2" SelectionChanged="guestsDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="Guestid_Columnd" Header="Guest ID" Width="SizetoHeader" Binding="{Binding guest_id}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="First_nameColumnd" Header="First Name" Width="SizetoHeader" Binding="{Binding first_name}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="Last_nameColumnd" Header="Last Name" Width="SizetoHeader" Binding="{Binding last_name}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="phone_column" Header="Phone" Width="SizetoHeader" Binding="{Binding phone}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="AdressColumnd" Header="Adress" Width="SizetoHeader" Binding="{Binding adress}"></DataGridTextColumn>
-                <DataGridTextColumn x:Name="NationalityColumd" Header="Nationality" Width="SizetoHeader" Binding="{Binding nationality}"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="adressColumn" Binding="{Binding adress}" Header="adress" Width="120"/>
+                <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="first name" Width="80"/>
+                <DataGridTextColumn x:Name="guest_idColumn" Binding="{Binding guest_id}" Header="guest id" Width="80"/>
+                <DataGridTextColumn x:Name="last_nameColumn" Binding="{Binding last_name}" Header="last name" Width="80"/>
+                <DataGridTextColumn x:Name="nationalityColumn" Binding="{Binding nationality}" Header="nationality" Width="80"/>
+                <DataGridTextColumn x:Name="phoneColumn" Binding="{Binding phone}" Header="phone" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+
     </Grid>
 
 </Window>
