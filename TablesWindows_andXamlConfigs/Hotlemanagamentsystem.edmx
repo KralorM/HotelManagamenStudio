@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hotel5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bookings">
+          <Key>
+            <PropertyRef Name="booking_id" />
+          </Key>
+          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="guest_id" Type="int" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="price" Type="varchar" MaxLength="100" />
+          <Property Name="check_in" Type="date" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="hire_date" Type="date" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+          <Property Name="salary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="guests">
+          <Key>
+            <PropertyRef Name="guest_id" />
+          </Key>
+          <Property Name="guest_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="adress" Type="varchar" MaxLength="30" />
+          <Property Name="nationality" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="int" Nullable="false" />
+          <Property Name="booking_id" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="additional_payement" Type="int" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="int" Nullable="false" />
+          <Property Name="room_square" Type="varchar" MaxLength="50" />
+          <Property Name="additional_bed" Type="varchar" MaxLength="20" />
+          <Property Name="capacity" Type="int" />
+        </EntityType>
+        <Association Name="FK__bookings__guest___3A81B327">
+          <End Role="guests" Type="Self.guests" Multiplicity="0..1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests">
+              <PropertyRef Name="guest_id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="guest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bookings__room_i__3B75D760">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="0..1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__last___412EB0B6">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__payments__bookin__3E52440B">
+          <End Role="bookings" Type="Self.bookings" Multiplicity="0..1" />
+          <End Role="payments" Type="Self.payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookings">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotel5ModelStoreContainer">
+          <EntitySet Name="bookings" EntityType="Self.bookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="guests" EntityType="Self.guests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__bookings__guest___3A81B327" Association="Self.FK__bookings__guest___3A81B327">
+            <End Role="guests" EntitySet="guests" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bookings__room_i__3B75D760" Association="Self.FK__bookings__room_i__3B75D760">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__last___412EB0B6" Association="Self.FK__employees__last___412EB0B6">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__payments__bookin__3E52440B" Association="Self.FK__payments__bookin__3E52440B">
+            <End Role="bookings" EntitySet="bookings" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hotel5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bookings">
+          <Key>
+            <PropertyRef Name="booking_id" />
+          </Key>
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="guest_id" Type="Int32" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="price" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="check_in" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="guests" Relationship="Self.FK__bookings__guest___3A81B327" FromRole="bookings" ToRole="guests" />
+          <NavigationProperty Name="rooms" Relationship="Self.FK__bookings__room_i__3B75D760" FromRole="bookings" ToRole="rooms" />
+          <NavigationProperty Name="payments" Relationship="Self.FK__payments__bookin__3E52440B" FromRole="bookings" ToRole="payments" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="hire_date" Type="DateTime" Precision="0" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.FK__employees__last___412EB0B6" FromRole="employees" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="guests">
+          <Key>
+            <PropertyRef Name="guest_id" />
+          </Key>
+          <Property Name="guest_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="adress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bookings" Relationship="Self.FK__bookings__guest___3A81B327" FromRole="guests" ToRole="bookings" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" />
+          <Property Name="booking_id" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="additional_payement" Type="Int32" />
+          <NavigationProperty Name="bookings" Relationship="Self.FK__payments__bookin__3E52440B" FromRole="payments" ToRole="bookings" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="Int32" Nullable="false" />
+          <Property Name="room_square" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="additional_bed" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="capacity" Type="Int32" />
+          <NavigationProperty Name="bookings" Relationship="Self.FK__bookings__room_i__3B75D760" FromRole="rooms" ToRole="bookings" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__last___412EB0B6" FromRole="rooms" ToRole="employees" />
+        </EntityType>
+        <Association Name="FK__bookings__guest___3A81B327">
+          <End Role="guests" Type="Self.guests" Multiplicity="0..1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests">
+              <PropertyRef Name="guest_id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="guest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bookings__room_i__3B75D760">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="0..1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__payments__bookin__3E52440B">
+          <End Role="bookings" Type="Self.bookings" Multiplicity="0..1" />
+          <End Role="payments" Type="Self.payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookings">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="payments">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__last___412EB0B6">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotel5Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bookings" EntityType="Self.bookings" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="guests" EntityType="Self.guests" />
+          <EntitySet Name="payments" EntityType="Self.payments" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" />
+          <AssociationSet Name="FK__bookings__guest___3A81B327" Association="Self.FK__bookings__guest___3A81B327">
+            <End Role="guests" EntitySet="guests" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bookings__room_i__3B75D760" Association="Self.FK__bookings__room_i__3B75D760">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__payments__bookin__3E52440B" Association="Self.FK__payments__bookin__3E52440B">
+            <End Role="bookings" EntitySet="bookings" />
+            <End Role="payments" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__last___412EB0B6" Association="Self.FK__employees__last___412EB0B6">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hotel5ModelStoreContainer" CdmEntityContainer="hotel5Entities">
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="hotel5Model.bookings">
+              <MappingFragment StoreEntitySet="bookings">
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="check_in" ColumnName="check_in" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="hotel5Model.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="guests">
+            <EntityTypeMapping TypeName="hotel5Model.guests">
+              <MappingFragment StoreEntitySet="guests">
+                <ScalarProperty Name="guest_id" ColumnName="guest_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="nationality" ColumnName="nationality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="hotel5Model.payments">
+              <MappingFragment StoreEntitySet="payments">
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="additional_payement" ColumnName="additional_payement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="hotel5Model.rooms">
+              <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="room_square" ColumnName="room_square" />
+                <ScalarProperty Name="additional_bed" ColumnName="additional_bed" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
