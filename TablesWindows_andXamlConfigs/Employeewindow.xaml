@@ -1,0 +1,70 @@
+﻿<Window x:Class="HotelManagamenStudio.Employeewindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManagamenStudio"
+        mc:Ignorable="d"
+        Title="Employees" Height="350" Width="800" Loaded="Window_Loaded" Icon="C:\Users\gekon\Desktop\employeeicon.jpg">
+    <Window.Resources>
+        <CollectionViewSource x:Key="employeesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:employees}}"/>
+        <CollectionViewSource x:Key="employeesViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:employees}}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource employeesViewSource1}" Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="Bisque" x:Name="empgrid" DataContext="{StaticResource employeesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,13,0,0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="employee id:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="employee_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding employee_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="first name:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="first_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding first_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="hire date:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <DatePicker x:Name="hire_dateDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding hire_date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="last name:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="last_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding last_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Position:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="positionTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Position, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="room id:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="room_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="5" Text="{Binding room_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="salary:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <TextBox x:Name="salaryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding salary, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="265,16,10,25" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="employee_idColumn" Binding="{Binding employee_id}" Header="employee id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="first name" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="hire_dateColumn" Header="hire date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding hire_date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="last_nameColumn" Binding="{Binding last_name}" Header="last name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="positionColumn" Binding="{Binding Position}" Header="Position" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="room_idColumn" Binding="{Binding room_id}" Header="room id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="salaryColumn" Binding="{Binding salary}" Header="salary" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="Addbttn" Click="Addbttn_Click" Content="Add" HorizontalAlignment="Left" Margin="23,255,0,0" Grid.Row="2" VerticalAlignment="Top" Width="66"/>
+        <Button x:Name="Deltebttn" Click="Deltebttn_Click" Content="Delete" HorizontalAlignment="Left" Margin="94,255,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-1.277,-0.136" Width="72"/>
+        <Button x:Name="Cancelbttn" Click="Cancelbttn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="171,255,0,0" Grid.Row="2" VerticalAlignment="Top" Width="61"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="94,290,0,0" Grid.Row="2" VerticalAlignment="Top" Width="72" Height="25" Click="Button_Click"/>
+    </Grid>
+</Window>
