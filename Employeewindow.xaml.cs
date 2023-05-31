@@ -127,5 +127,12 @@ namespace HotelManagamenStudio
             empgrid.Visibility = Visibility.Visible;
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            hotel5Entities hotel5Entities = new hotel5Entities();
+
+            this.employeesDataGrid.ItemsSource = hotel5Entities.employees.ToList();
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace HotelManagamenStudio
         {
             guests guests = new guests();
 
-            //guests.guest_id = GuestIDTextBox.Text.Trim();
+            guests.guest_id = Convert.ToInt32(GuestIDTextBox.Text.Trim());
             guests.first_name = FirstNameTextBox.Text.Trim();
             guests.last_name = LastNameTextBox.Text.Trim();
             guests.phone = phoneTextBox.Text.Trim();

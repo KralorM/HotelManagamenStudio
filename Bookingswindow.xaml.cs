@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
 using System.Runtime.Remoting.Contexts;
+using System.ComponentModel.Design;
 
 namespace HotelManagamenStudio
 {
@@ -25,12 +26,15 @@ namespace HotelManagamenStudio
         CollectionViewSource bookingsviewsource;
         CollectionViewSource paymentsviewsource;
         CollectionViewSource bookingsViewSource2;
+        CollectionViewSource bookingsViewSource3;
 
         public Bookingswindow()
         {
             InitializeComponent();
             bookingsviewsource = ((CollectionViewSource)(FindResource("bookingsViewSource")));
             paymentsviewsource = ((CollectionViewSource)(FindResource("bookingsViewSource1")));
+            bookingsViewSource2 = ((CollectionViewSource)(FindResource("bookingsViewSource2")));
+            bookingsViewSource3 = ((CollectionViewSource)(FindResource("bookingsViewSource3")));
             DataContext = this;
         }
 
@@ -48,55 +52,11 @@ namespace HotelManagamenStudio
             
             System.Windows.Data.CollectionViewSource bookingsViewSource2 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("bookingsViewSource2")));
             // Load data by setting the CollectionViewSource.Source property:
-            // bookingsViewSource2.Source = [generic data source]
             System.Windows.Data.CollectionViewSource bookingsViewSource3 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("bookingsViewSource3")));
             // Load data by setting the CollectionViewSource.Source property:
             // bookingsViewSource3.Source = [generic data source]
             bookingsViewSource3.Source = hotel.bookings.Local;
-        }
 
-        private void addbttn_payments_Click(object sender, RoutedEventArgs e)
-        {
-            payments payments = new payments();
-
-            payments.payment_id = Convert.ToInt32(payment_idTextBox.Text.Trim());
-            payments.booking_id = Convert.ToInt32(booking_idTextBox1.Text.Trim());
-            payments.amount = Convert.ToInt32(amountTextBox.Text.Trim());
-            payments.additional_payement = Convert.ToInt32(additional_payementTextBox.Text.Trim());
-
-
-
-            using (hotel5Entities hotel5 = new hotel5Entities())
-            {
-                hotel.payments.Add(payments);
-                hotel.SaveChanges();
-
-            }
-            MessageBox.Show("Submitted succesfully!");
-        }
-
-        private void deltebttn_payments_Click(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to delete this row?", "EF CRUD Operation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                using (hotel5Entities hotel = new hotel5Entities())
-                {
-                    var pay = paymentsviewsource.View.CurrentItem as payments;
-
-                    var paym = (from p in hotel.payments
-                                where p.payment_id == pay.payment_id
-                                select p).FirstOrDefault();
-
-                    if (paym != null)
-                    {
-                        hotel.payments.Remove(paym);
-                        hotel.SaveChanges();
-                        paymentsviewsource.View.Refresh();
-
-                    }
-
-                }
-            }
         }
 
         private void addbttn_bookings_Click(object sender, RoutedEventArgs e)
@@ -112,10 +72,11 @@ namespace HotelManagamenStudio
 
             using (hotel5Entities hotel5 = new hotel5Entities())
             {
-                hotel.bookings.Add(bookings);
-                hotel.SaveChanges();
+                hotel5.bookings.Add(bookings);
+                hotel5.SaveChanges();
 
             }
+            bookingsViewSource3.View.Refresh();
             MessageBox.Show("Submitted succesfully!");
         }
 
@@ -125,7 +86,7 @@ namespace HotelManagamenStudio
             {
                 using (hotel5Entities hotel = new hotel5Entities())
                 {
-                    var bok = bookingsviewsource.View.CurrentItem as bookings;
+                    var bok = bookingsViewSource3.View.CurrentItem as bookings;
 
                     var book = (from b in hotel.bookings
                                 where b.booking_id == bok.booking_id
@@ -135,7 +96,8 @@ namespace HotelManagamenStudio
                     {
                         hotel.bookings.Remove(book);
                         hotel.SaveChanges();
-                        bookingsviewsource.View.Refresh();
+                        bookingsViewSource3.View.Refresh();
+                     
 
                     }
 
@@ -154,14 +116,11 @@ namespace HotelManagamenStudio
             bookingsgrid.Visibility = Visibility.Visible;
         }
 
-        private void cancelbttn_payments_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            additional_payementTextBox.Text = "";
-            booking_idTextBox1.Text = "";
-            amountTextBox.Text = "";
-            payment_idTextBox.Text = "";
+            hotel5Entities hotel5Entities = new hotel5Entities();
 
-            paymentsDataGrid.Visibility = Visibility.Visible;
+            this.bookingsDataGrid.ItemsSource = hotel5Entities.bookings.ToList();
         }
     }
 }

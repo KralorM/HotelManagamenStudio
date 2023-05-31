@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagamenStudio"
         mc:Ignorable="d"
-        Title="Employeewindow" Height="350" Width="800" Loaded="Window_Loaded">
+        Title="Employees" Height="350" Width="800" Loaded="Window_Loaded" Icon="C:\Users\gekon\Desktop\employeeicon.jpg">
     <Window.Resources>
         <CollectionViewSource x:Key="employeesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:employees}}"/>
         <CollectionViewSource x:Key="employeesViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:employees}}"/>
@@ -16,7 +16,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="empgrid" DataContext="{StaticResource employeesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,13,0,0" Grid.Row="2">
+        <Grid Background="Bisque" x:Name="empgrid" DataContext="{StaticResource employeesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,13,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -45,7 +45,7 @@
             <Label Grid.Column="0" Content="salary:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <TextBox x:Name="salaryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="6" Text="{Binding salary, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="265,16,10,149" Grid.Row="2">
+        <DataGrid x:Name="employeesDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="265,16,10,25" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="employee_idColumn" Binding="{Binding employee_id}" Header="employee id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="first name" Width="SizeToHeader"/>
@@ -62,8 +62,9 @@
                 <DataGridTextColumn x:Name="salaryColumn" Binding="{Binding salary}" Header="salary" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="Addbttn" Click="Addbttn_Click" Content="Add" HorizontalAlignment="Left" Margin="54,255,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Button x:Name="Deltebttn" Click="Deltebttn_Click" Content="Delete" HorizontalAlignment="Left" Margin="128,255,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-1.277,-0.136"/>
-        <Button x:Name="Cancelbttn" Click="Cancelbttn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="193,255,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button x:Name="Addbttn" Click="Addbttn_Click" Content="Add" HorizontalAlignment="Left" Margin="23,255,0,0" Grid.Row="2" VerticalAlignment="Top" Width="66"/>
+        <Button x:Name="Deltebttn" Click="Deltebttn_Click" Content="Delete" HorizontalAlignment="Left" Margin="94,255,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-1.277,-0.136" Width="72"/>
+        <Button x:Name="Cancelbttn" Click="Cancelbttn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="171,255,0,0" Grid.Row="2" VerticalAlignment="Top" Width="61"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="94,290,0,0" Grid.Row="2" VerticalAlignment="Top" Width="72" Height="25" Click="Button_Click"/>
     </Grid>
 </Window>

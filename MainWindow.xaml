@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagamenStudio"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded" Icon="C:\Users\gekon\Desktop\hotelicon.jpg">
     <Window.Resources>
         <CollectionViewSource x:Key="guestsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:guests}}"/>
         <CollectionViewSource x:Key="guestsViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:guests}}"/>

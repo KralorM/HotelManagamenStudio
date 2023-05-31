@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagamenStudio", "Hot
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD18DF56-4010-49B5-A852-33719671586B}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\bookingsicon.jpg = ..\..\..\Desktop\bookingsicon.jpg
+		..\..\..\Desktop\employeeicon.jpg = ..\..\..\Desktop\employeeicon.jpg
 		..\..\..\Desktop\hotel5.jpg = ..\..\..\Desktop\hotel5.jpg
+		..\..\..\Desktop\hotelbcg1.jpg = ..\..\..\Desktop\hotelbcg1.jpg
+		..\..\..\Desktop\hotelicon.jpg = ..\..\..\Desktop\hotelicon.jpg
+		..\..\..\Desktop\loginicon.jpg = ..\..\..\Desktop\loginicon.jpg
+		..\..\..\Desktop\roomsicon.jpg = ..\..\..\Desktop\roomsicon.jpg
 	EndProjectSection
 EndProject
 Global

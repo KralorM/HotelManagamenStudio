@@ -5,22 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagamenStudio"
         mc:Ignorable="d"
-        Title="Rooms" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Rooms" Height="450" Width="400" Loaded="Window_Loaded" Icon="C:\Users\gekon\Desktop\roomsicon.jpg">
     <Window.Resources>
         <CollectionViewSource x:Key="roomsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:rooms}}"/>
         <CollectionViewSource x:Key="roomsViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:rooms}}"/>
         <CollectionViewSource x:Key="roomsViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:rooms}}"/>
+        <ImageBrush x:Key="hotelbcg" ImageSource="C:\Users\gekon\Desktop\hotelbcg1.jpg"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource roomsViewSource2}">
+    <Grid DataContext="{StaticResource roomsViewSource2}" Margin="0,0,10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="roomsGrid" DataContext="{StaticResource roomsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,35,0,0" Grid.Row="2">
+        <Grid Background="Bisque" x:Name="roomsGrid" DataContext="{StaticResource roomsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" Grid.Row="2" Width="268" Height="128">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="196*"/>
+                <ColumnDefinition Width="363*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -28,16 +31,16 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="additional bed:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="additional_bedTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding additional_bed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="capacity:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="capacityTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding capacity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="room id:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="room_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding room_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="room square:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="room_squareTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding room_square, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="additional bed:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="additional_bedTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Text="{Binding additional_bed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="capacity:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="capacityTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Grid.Row="1" Text="{Binding capacity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="room id:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="room_idTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Grid.Row="2" Text="{Binding room_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="room square:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="room_squareTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Grid.Row="3" Text="{Binding room_square, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <DataGrid x:Name="roomsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,168,131,10" Grid.Row="2">
+        <DataGrid x:Name="roomsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,168,10,10" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="additional_bedColumn" Binding="{Binding additional_bed}" Header="additional bed" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="capacityColumn" Binding="{Binding capacity}" Header="capacity" Width="SizeToHeader"/>
@@ -45,8 +48,9 @@
                 <DataGridTextColumn x:Name="room_squareColumn" Binding="{Binding room_square}" Header="room square" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="add_bttn" Click="add_bttn_Click" Content="Add" HorizontalAlignment="Left" Margin="289,15,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
-        <Button x:Name="delete_bttn" Click="delete_bttn_Click" Content="Delete" HorizontalAlignment="Left" Margin="289,64,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
-        <Button x:Name="Cancel_bttn" Click="Cancel_bttn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="289,119,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
+        <Button x:Name="add_bttn" Click="add_bttn_Click" Content="Add" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
+        <Button x:Name="delete_bttn" Click="delete_bttn_Click" Content="Delete" HorizontalAlignment="Left" Margin="81,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
+        <Button x:Name="Cancel_bttn" Click="Cancel_bttn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="162,0,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="30"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="243,0,0,0" Grid.RowSpan="3" VerticalAlignment="Top" Width="83" Height="30" Click="Button_Click"/>
     </Grid>
 </Window>

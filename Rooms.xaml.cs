@@ -28,10 +28,8 @@ namespace HotelManagamenStudio
         public Rooms()
         {
             InitializeComponent();
-            roomsViewSource = ((CollectionViewSource)(FindResource("roomsViewSource2")));
+            roomsViewSource = ((CollectionViewSource)(FindResource("roomsViewSource")));
             DataContext = this;
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -50,7 +48,9 @@ namespace HotelManagamenStudio
             // Load data by setting the CollectionViewSource.Source property:
             // roomsViewSource2.Source = [generic data source]
             contex.rooms.Load();
-            roomsViewSource2.Source = contex.rooms.Local;
+            roomsViewSource.Source = contex.rooms.Local;
+            this.roomsDataGrid.ItemsSource = contex.rooms.Local;
+            
         }
 
         private void Cancel_bttn_Click(object sender, RoutedEventArgs e)
@@ -80,6 +80,7 @@ namespace HotelManagamenStudio
                         hotel.rooms.Remove(room);
                         hotel.SaveChanges();
                         roomsViewSource.View.Refresh();
+                        
 
                     }
 
@@ -105,6 +106,13 @@ namespace HotelManagamenStudio
 
             }
             MessageBox.Show("Submitted succesfully!");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            hotel5Entities hotel5Entities = new hotel5Entities();
+
+            this.roomsDataGrid.ItemsSource = hotel5Entities.rooms.ToList();
         }
     }
 }

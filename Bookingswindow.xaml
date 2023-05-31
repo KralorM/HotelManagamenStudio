@@ -5,22 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagamenStudio"
         mc:Ignorable="d"
-        Title="Bookingswindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Bookings" Height="450" Width="400" Loaded="Window_Loaded" Icon="C:\Users\gekon\Desktop\bookingsicon.jpg">
+
     <Window.Resources>
         <CollectionViewSource x:Key="bookingsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:bookings}}"/>
         <CollectionViewSource x:Key="bookingsViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:bookings}}"/>
-        <CollectionViewSource x:Key="bookingspaymentsViewSource" Source="{Binding payments, Source={StaticResource bookingsViewSource1}}"/>
         <CollectionViewSource x:Key="bookingsViewSource2" d:DesignSource="{d:DesignInstance {x:Type local:bookings}}"/>
-        <CollectionViewSource x:Key="bookingspaymentsViewSource1" Source="{Binding payments, Source={StaticResource bookingsViewSource2}}"/>
         <CollectionViewSource x:Key="bookingsViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:bookings}}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource bookingspaymentsViewSource}">
+    <Grid DataContext="{StaticResource bookingsViewSource}" Margin="0,0,-236,0" RenderTransformOrigin="0.62,0.417">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="bookingsgrid" DataContext="{StaticResource bookingsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,26,0,0" Grid.Row="2">
+        <Grid Background="Bisque" x:Name="bookingsgrid" DataContext="{StaticResource bookingsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,26,0,0" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -43,35 +42,7 @@
             <Label Grid.Column="0" Content="room id:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="room_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding room_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <DataGrid x:Name="paymentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="420,199,37,28" Grid.Row="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="additional_payementColumn" Binding="{Binding additional_payement}" Header="additional payement" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding amount}" Header="amount" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="booking_idColumn" Binding="{Binding booking_id}" Header="booking id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="payment_idColumn" Binding="{Binding payment_id}" Header="payment id" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Grid x:Name="grid2" DataContext="{StaticResource bookingspaymentsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="427,46,0,0" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="additional payement:" HorizontalAlignment="Left" Margin="0,6,0,0" Grid.Row="0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-            <TextBox x:Name="additional_payementTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding additional_payement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="amount:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="amountTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding amount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="booking id:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="booking_idTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding booking_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="payment id:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="payment_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding payment_id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        </Grid>
-        <DataGrid x:Name="bookingsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bookingsViewSource3}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="28,199,423,28" Grid.Row="2">
+        <DataGrid x:Name="bookingsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bookingsViewSource3}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,199,247,28" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="booking_idColumn1" Binding="{Binding booking_id}" Header="booking id" Width="SizeToHeader"/>
                 <DataGridTemplateColumn x:Name="check_inColumn" Header="check in" Width="SizeToHeader">
@@ -86,11 +57,11 @@
                 <DataGridTextColumn x:Name="room_idColumn" Binding="{Binding room_id}" Header="room id" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Click="addbttn_payments_Click" x:Name="addbttn_payments" Content="Add" HorizontalAlignment="Left" Margin="697,67,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
-        <Button Click="deltebttn_payments_Click" x:Name="deltebttn_payments" Content="Delete" HorizontalAlignment="Left" Margin="697,106,0,0" Grid.Row="2" VerticalAlignment="Top" Width="76"/>
-        <Button Click="addbttn_bookings_Click" x:Name="addbttn_bookings" Content="Add" HorizontalAlignment="Left" Margin="257,57,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
-        <Button Click="deletebttn_bookings_Click" x:Name="deletebttn_bookings" Content="Delete" HorizontalAlignment="Left" Margin="257,106,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
-        <Button Click="cancelbttn_bookings_Click" x:Name="cancelbttn_bookings" Content="Cancel" HorizontalAlignment="Left" Margin="257,146,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
-        <Button Click="cancelbttn_payments_Click" x:Name="cancelbttn_payments" Content="Cancel" HorizontalAlignment="Left" Margin="697,146,0,0" Grid.Row="2" VerticalAlignment="Top" Width="76"/>
+        <Button Click="addbttn_bookings_Click" x:Name="addbttn_bookings" Content="Add" HorizontalAlignment="Left" Margin="257,32,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
+        <Button Click="deletebttn_bookings_Click" x:Name="deletebttn_bookings" Content="Delete" HorizontalAlignment="Left" Margin="257,68,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
+        <Button Click="cancelbttn_bookings_Click" x:Name="cancelbttn_bookings" Content="Cancel" HorizontalAlignment="Left" Margin="257,106,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80"/>
+        <Button HorizontalAlignment="Left" Margin="257,150,0,0" Grid.Row="2" VerticalAlignment="Top" Width="80" Click="Button_Click">
+            <Button Content="Load"/>
+        </Button>
     </Grid>
 </Window>

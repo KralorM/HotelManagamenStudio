@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagamenStudio"
         mc:Ignorable="d"
-        Title="Loginscreen" Height="450" Width="310">
+        Title="HotelManagamentStudio" Height="450" Width="310" Icon="C:\Users\gekon\Desktop\loginicon.jpg">
     <Window.Resources>
         <ImageBrush x:Key="hotel5image" ImageSource="C:\Users\gekon\Desktop\hotel5.jpg"/>
     </Window.Resources>
