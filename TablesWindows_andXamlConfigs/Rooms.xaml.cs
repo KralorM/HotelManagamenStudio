@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,8 @@ using System.Runtime.Remoting.Contexts;
 namespace HotelManagamenStudio
 {
     /// <summary>
-    /// Interaction logic for Rooms.xaml
+    /// Konstruktor klasy Rooms inicjalizuje  pola i właściwości oraz ustawia DataContext na 
+    /// obiekt klasy Rooms co umożliwia powiązanie danych w XAML
     /// </summary>
     public partial class Rooms : Window
     {
@@ -31,7 +32,12 @@ namespace HotelManagamenStudio
             roomsViewSource = ((CollectionViewSource)(FindResource("roomsViewSource")));
             DataContext = this;
         }
-
+        /// <summary>
+        /// Metoda Window_Loaded jest wywoływana po załadowaniu okna i służy do pobrania danych z 
+        /// bazy danych i powiązania ich z elementami interfejsu użytkownika.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -52,7 +58,12 @@ namespace HotelManagamenStudio
             this.roomsDataGrid.ItemsSource = contex.rooms.Local;
             
         }
-
+        /// <summary>
+        /// Metoda cancelbttn_bookings_Click obsługuje kliknięcie przycisku "Cancel" 
+        /// i czyści pola formularza.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_bttn_Click(object sender, RoutedEventArgs e)
         {
             room_idTextBox.Text = "";
@@ -62,7 +73,12 @@ namespace HotelManagamenStudio
 
             roomsGrid.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Metoda deletebttn_bookings_Click obsługuje kliknięcie przycisku 
+        /// "Delete"  i usuwa wybrany pokój z bazy danych.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void delete_bttn_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete this row?", "EF CRUD Operation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -87,7 +103,13 @@ namespace HotelManagamenStudio
                 }
             }
         }
-
+        /// <summary>
+        /// Metoda addbttn_bookings_Click obsługuje kliknięcie przycisku "Add"  i 
+        /// dodaje nowy pokój do 
+        /// bazy danych na podstawie danych wprowadzonych przez użytkownika.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_bttn_Click(object sender, RoutedEventArgs e)
         {
             rooms rooms = new rooms();
@@ -107,7 +129,12 @@ namespace HotelManagamenStudio
             }
             MessageBox.Show("Submitted succesfully!");
         }
-
+        /// <summary>
+        /// Metoda Button_Click obsługuje kliknięcie przycisku "Cancel" i czyści wprowadzone dane, 
+        /// przywracając widok tabeli pokojów.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             hotel5Entities hotel5Entities = new hotel5Entities();
