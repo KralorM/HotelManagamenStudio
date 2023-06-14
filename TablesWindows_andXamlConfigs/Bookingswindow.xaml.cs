@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +18,17 @@ using System.ComponentModel.Design;
 namespace HotelManagamenStudio
 {
     /// <summary>
-    /// Interaction logic for Bookingswindow.xaml
+    /// Klasa Bookingswindow dziedziczy po klasie Window oznacza to, że reprezentuje okno w 
+    /// interfejsie użytkownika.
     /// </summary>
     public partial class Bookingswindow : Window
-    {   
+    {
+        /// <summary>
+        /// W konstruktorze 
+        /// Bookingswindow inicjalizowane są obiekty 
+        /// CollectionViewSource i przypisywane są im źródła danych.
+        /// Kolejno dla tabel bookings,payments
+        /// </summary>
         hotel5Entities hotel = new hotel5Entities();
         CollectionViewSource bookingsviewsource;
         CollectionViewSource paymentsviewsource;
@@ -38,6 +45,13 @@ namespace HotelManagamenStudio
             DataContext = this;
         }
 
+        /// <summary>
+        /// Metoda Window_Loaded jest wywoływana po załadowaniu okna i 
+        /// służy do ustawienia źródła danych dla niektórych kontrolkami w 
+        /// interfejsie użytkownika.Ładujemy tutaj zródło dla tabeli bookings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -58,7 +72,13 @@ namespace HotelManagamenStudio
             bookingsViewSource3.Source = hotel.bookings.Local;
 
         }
-
+        /// <summary>
+        /// Metoda addbttn_bookings_Click obsługuje kliknięcie przycisku "Add" i 
+        /// dodaje nową rezerwację do bazy danych na podstawie danych wprowadzonych 
+        /// przez użytkownika.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addbttn_bookings_Click(object sender, RoutedEventArgs e)
         {
             bookings bookings = new bookings();
@@ -79,7 +99,12 @@ namespace HotelManagamenStudio
             bookingsViewSource3.View.Refresh();
             MessageBox.Show("Submitted succesfully!");
         }
-
+        /// <summary>
+        /// Metoda deletebttn_bookings_Click obsługuje kliknięcie przycisku "Delete" i 
+        /// usuwa zaznaczoną rezerwację z bazy danych.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deletebttn_bookings_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete this row?", "EF CRUD Operation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -104,7 +129,12 @@ namespace HotelManagamenStudio
                 }
             }
         }
-
+        /// <summary>
+        /// Metoda cancelbttn_bookings_Click obsługuje kliknięcie przycisku "Cancel" i czyści wprowadzone dane, 
+        /// przywracając widok tabeli rezerwacji.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancelbttn_bookings_Click(object sender, RoutedEventArgs e)
         {
             booking_idTextBox.Text = "";
@@ -115,7 +145,12 @@ namespace HotelManagamenStudio
 
             bookingsgrid.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Metoda cancelbttn_bookings_Click obsługuje kliknięcie przycisku "Cancel" i czyści wprowadzone dane, 
+        /// przywracając widok tabeli rezerwacji.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             hotel5Entities hotel5Entities = new hotel5Entities();
