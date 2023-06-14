@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,8 @@ using System.Runtime.CompilerServices;
 namespace HotelManagamenStudio
 {
     /// <summary>
-    /// Interaction logic for Employeewindow.xaml
+    /// W konstruktorze Employeewindow inicjalizowane są obiekty CollectionViewSource i przypisywane są 
+    /// im źródła danych.Zródła danych przypisywane sa z tabelii employees
     /// </summary>
     public partial class Employeewindow : Window
     {   
@@ -33,7 +34,12 @@ namespace HotelManagamenStudio
             employeViewSource = ((CollectionViewSource)(FindResource("employeesViewSource1")));
             DataContext = this;
         }
-
+        /// <summary>
+        /// Metoda Window_Loaded jest wywoływana po załadowaniu okna i służy do ustawienia
+        /// źródła danych dla kontrolek w interfejsie użytkownika.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -47,7 +53,13 @@ namespace HotelManagamenStudio
             hotel5Entities.employees.Load();
             employeesViewSource1.Source = hotel5Entities.employees.Local;
         }
-
+        /// <summary>
+        /// Metoda addbttn_bookings_Click obsługuje kliknięcie przycisku "Add" i 
+        /// dodaje nowego pracownika do bazy danych 
+        /// na podstawie danych wprowadzonych przez użytkownika.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Addbttn_Click(object sender, RoutedEventArgs e)
         {
             employees employees = new employees();
@@ -70,7 +82,12 @@ namespace HotelManagamenStudio
 
            
         }
-
+        /// <summary>
+        /// Metoda deletebttn_bookings_Click obsługuje kliknięcie przycisku 
+        /// "Delete" i usuwa zaznaczonego pracownika z bazy danych.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Deltebttn_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete this row?","EF CRUD OPERATION",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -92,28 +109,13 @@ namespace HotelManagamenStudio
             }
 
 
-            //if (MessageBox.Show("Are you sure you want to delete this row?", "EF CRUD Operation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            //{
-            //    using (hotel5Entities hotel = new hotel5Entities())
-            //    {
-            //        var pay = paymentsviewsource.View.CurrentItem as payments;
-
-            //        var paym = (from p in hotel.payments
-            //                    where p.payment_id == pay.payment_id
-            //                    select p).FirstOrDefault();
-
-            //        if (paym != null)
-            //        {
-            //            hotel.payments.Remove(paym);
-            //            hotel.SaveChanges();
-            //            paymentsviewsource.View.Refresh();
-
-            //        }
-
-            //    }
-            //}
         }
-
+        /// <summary>
+        /// Metoda cancelbttn_bookings_Click obsługuje kliknięcie przycisku "Cancel" i
+        /// czyści wprowadzone dane, przywracając widok tabeli pracowników.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancelbttn_Click(object sender, RoutedEventArgs e)
         {
             employee_idTextBox.Text = "";
@@ -127,7 +129,12 @@ namespace HotelManagamenStudio
             empgrid.Visibility = Visibility.Visible;
 
         }
-
+        /// <summary>
+        /// Metoda Button_Click obsługuje kliknięcie przycisku i aktualizuje 
+        /// zawartość tabeli pracowników pobierając dane bezpośrednio z bazy danych.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             hotel5Entities hotel5Entities = new hotel5Entities();
