@@ -16,8 +16,9 @@ using System.Data.Entity;
 
 namespace HotelManagamenStudio
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
+     /// <summary>
+    /// W konstruktorze Mainwindow inicjalizowane są 
+    /// obiekty CollectionViewSource i przypisywane są im źródła danych.
     /// </summary>
     public partial class MainWindow : Window
     {   
